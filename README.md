@@ -79,7 +79,7 @@ par_num = 6; % Set number of parallel processes for parallel computation.  NOTE 
 In order to improve efficiency, it is possible to run the analysis in parallel over different individual frames. However, since the anaylsis codes here use graphics handles, it is not possible to use the standard matlab parallel processing toolbox functions such as “parfor”. Instead, the code enables automatic launching of multiple separate instances of matlab, and the total number of frames in the movie is automatically split between the number of parallel instances specified (if none is specified, the default is 8). Note that if you use this option and are running multiple movies, each will run in parallel, so take this into account when setting the number of parallel processes. If you do not wish to use parallel processing, choose the appropriate option in the raw analysis section. 
 
 If you want to use parallel computation, add the relevant path to your
-matlab search path (see manual in main analysis folder)!
+matlab search path (see instructions at the end of this document)!
 
 
 ### Sub-functions: 
@@ -284,3 +284,23 @@ This runs the function:
 % this defect added.
 
 ```
+## Add path permanently to matlab search path (for parallel processing)
+
+In order to run functions from a prompt command inside Matalb, the functions need to be either in the current directory, or in a directory that is part of the Matlab default search path. The functions we currently use require adding the code path to the default search list. Please follow these steps (from Matlab documentation, with comments in blue):
+
+####Set the MATLABPATH Environment Variable
+You can also add folders to the search path at startup by setting the MATLABPATH environment variable:
+
+**Windows**
+
+To set the MATLABPATH environment variable in Windows®, from the Windows **Control Panel**, go to **System** and select **Advanced system settings**. If you can’t find this option, use the search option to search within System Click the **Environment Variables**... button:
+![](doc/fig1addpath.png)
+Click **New**... or **Edit**... to create or edit the MATLABPATH environment variable. In the dialog box that appears, set the variable name to MATLABPATH and the variable value to a semicolon-separated list of folders you want to add to the search path. For example, to add two folders, `c:\matlab_files\myfolder1 and c:\matlab_files\myfolder2`, to the MATLABPATH environment variable, enter `c:\matlab_files\myfolder1;c:\matlab_files\myfolder2` as the variable value. 
+Click **OK** to set the variable and exit the dialog box. ***Restart MATLAB for the new settings to take effect.***
+![](doc/fig2addpath.png)
+
+To set the environment variable from a command window, run the command `set MATLABPATH=folders`, where folders is a semicolon-separated list of folders. For example, suppose that you want to add two folders, `c:\matlab_files\myfolder1` and `c:\matlab_files\myfolder2`, to the MATLABPATH environment variable. Run the command
+`set MATLABPATH=c:\matlab_files\myfolder1;c:\matlab_files\myfolder2`.
+
+**Once the environment variable is set, you must start MATLAB from the same command window for the settings to take effect.** The environment variable persists only as long as the command window is open.
+
