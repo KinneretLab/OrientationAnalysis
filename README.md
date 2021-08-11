@@ -295,6 +295,7 @@ You can also add folders to the search path at startup by setting the MATLABPATH
 
 To set the MATLABPATH environment variable in Windows®, from the Windows **Control Panel**, go to **System** and select **Advanced system settings**. If you can’t find this option, use the search option to search within System Click the **Environment Variables**... button:
 ![](doc/fig1addpath.png)
+
 Click **New**... or **Edit**... to create or edit the MATLABPATH environment variable. In the dialog box that appears, set the variable name to MATLABPATH and the variable value to a semicolon-separated list of folders you want to add to the search path. For example, to add two folders, `c:\matlab_files\myfolder1 and c:\matlab_files\myfolder2`, to the MATLABPATH environment variable, enter `c:\matlab_files\myfolder1;c:\matlab_files\myfolder2` as the variable value. 
 Click **OK** to set the variable and exit the dialog box. ***Restart MATLAB for the new settings to take effect.***
 ![](doc/fig2addpath.png)
