@@ -1,4 +1,4 @@
-function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirDataDefect)
+function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirDataDefect,useCenter)
 % Runs over all types of defects and extracts information from Ground Truth
 % Labeler format.
  cd(dirLocalOP); load(thisFileImNameBase); % load the localOP to find the defect location
@@ -21,7 +21,7 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
             for j=1: length(gTruth.LabelData.h{ind}),
                 numDefects(k) = numDefects(k)+1;
                 thisDefect=gTruth.LabelData.h{ind}(j); typeDefect = 'half';
-                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect);
+                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect,useCenter);
                 defectList(numDefects(k)).type=1/2; % now Insert the relevant information for this defect
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;
@@ -33,7 +33,7 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
             for j=1: length(gTruth.LabelData.mh{ind}),% read in all the minus half defects
                 numDefects(k) = numDefects(k)+1;
                 thisDefect=gTruth.LabelData.mh{ind}(j); typeDefect = 'mhalf';
-                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect);
+                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect,useCenter);
                 defectList(numDefects(k)).type=-1/2; % now Insert the relevant information for this defect
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;
@@ -45,7 +45,7 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
             for j=1: length(gTruth.LabelData.o{ind}),% read in all the one defects
                 numDefects(k) = numDefects(k)+1;
                 thisDefect=gTruth.LabelData.o{ind}(j); typeDefect = 'one';
-                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect);
+                [defPosition , defAngle] = extractDefectInfo (localOP, thisDefect, typeDefect,useCenter);
                 defectList(numDefects(k)).type=1; % now Insert the relevant information for this defect
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;

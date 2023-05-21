@@ -1,4 +1,4 @@
-function  plotFrameGTL(thisFileImName, mainDir, analysisParameters, toSave, numImages);
+function  plotFrameGTL(thisFileImName, mainDir, analysisParameters, toSave, numImages)
 % function  plotFrameAnalysis(thisFileImName, mainDir, analysisParameters, toSave, is4Images);
 % This function takes a single frame thisFileImName from mainDir and determines the local
 % order parameter and plots the quiver with the localOP and original image
@@ -49,15 +49,17 @@ localOPwinSize = analysisParameters(7); % this is the window size used to calcul
 
 %% load image from file and raw analysis output
 try % load the image and raw analysis
-    cd (dirImages); thisIm=importdata(thisFileImName);
-    %     endName=strfind(thisFileImName,'.tif');
-    endName=strfind(thisFileImName,'.png');
-    thisFileImNameSave = thisFileImName (1:endName-1);
-    cd (dirOrientation); load(thisFileImNameSave);
-    cd (dirCoherence); load(thisFileImNameSave);
+    cd (dirImages);   thisIm=importdata([thisFileImName,'.tiff']);
 catch
-    thisIm=[]; disp (['no image found ',thisFileImName]); % if no image is found
+    try
+    cd (dirImages);   thisIm=importdata([thisFileImName,'.png']);
+    catch
+            thisIm=[]; disp (['no image found ',thisFileImName]); % if no image is found
+
+    end
 end
+    cd (dirOrientation); load(thisFileImName);
+    cd (dirCoherence); load(thisFileImName);
 %% calculate downsampled orientation field, reliability and coherence by averaging over blocks of size blocksigma
 meanFilterFunction = @(theBlockStructure) nanmean(theBlockStructure.data(:)) * ones(2,2, class(theBlockStructure.data)); % this version makes each values at grid point into 2x2 block; makes the  localOP  smoother
 blocksigmaRnd= round(blocksigma); % make blocksigma an integer for the window averaging
@@ -162,9 +164,8 @@ if ntot==4,
 
 %% save the localOP and quiver plot
 if toSave==1,
-    endName=strfind(thisFileImName,'.png');
-    thisFileImNameSave = thisFileImName (1:endName-1);
-    cd(dirQuiverGTL); imwrite(quiverPlot,[thisFileImNameSave,'.png']) % %
+
+    cd(dirQuiverGTL); imwrite(quiverPlot,[thisFileImName,'.png']) % %
     
 end
 

@@ -1,4 +1,4 @@
-function runMovieGTLformat (mainDir, toSave, calibration, numImages, frames);
+function runMovieGTLformat (mainDir, toSave, calibration, numImages, frames)
 % function runMovieAnalysis (mainDir, toSave, calibration, is4Images, frames);
 % this function runs the raw analysis of orientation on the movie defined
 % in "mainDir"; "toSave"=1 for saving the results in "mainDir". "frames" is
@@ -40,17 +40,17 @@ analysisParameters = [gradientsigma,blocksigma,orientsmoothsigma,coherenceWinSiz
 
 %% run analysis on all frames and save
 % get images names
-cd(dirRawImages); fileNames=dir ('*.tif*');
+cd(dirImages); fileNames=dir ('*.tif*');
 % if no frames variable is indicated run on the entire movie
 if ~exist('frames'),
     frames=[1:length(fileNames)];
 end
 % loop on all frames and do the analysis
-for k=frames,
+for k=frames
     k % show the frame being analyzed
     thisFile=fileNames(k).name;
-    endName=strfind(thisFile,'.tif'); thisFilePng=[thisFile(1:endName-1),'.png'];
-    plotFrameGTL(thisFilePng, mainDir, analysisParameters, toSave,numImages); % this calculates the local order parameter and plots the quiver with the local order parameter and original image
-end;
+    endName=strfind(thisFile,'.tif'); thisFile=[thisFile(1:endName-1)];
+    plotFrameGTL(thisFile, mainDir, analysisParameters, toSave,numImages); % this calculates the local order parameter and plots the quiver with the local order parameter and original image
+end
 %% save results for this movie
 cd(mainDir); save('AnalysisSummary','mainDir','calibration','analysisParameters','frames') % saves the variables including the analysis parameters used

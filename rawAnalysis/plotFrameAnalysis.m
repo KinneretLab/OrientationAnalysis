@@ -1,5 +1,5 @@
 function  plotFrameAnalysis(thisFileImName, mainDir, analysisParameters, toSave, numImages);
-% function  plotFrameAnalysis(thisFileImName, mainDir, analysisParameters, toSave, is4Images);
+
 % This function takes a single frame thisFileImName from mainDir and determines the local
 % order parameter and plots the quiver with the localOP and original image
 % The image file is loaded from mainDir\Raw Images

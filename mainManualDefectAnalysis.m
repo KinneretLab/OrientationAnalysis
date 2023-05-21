@@ -1,21 +1,21 @@
  %% add the neededs path for the analysis
 clear all
-addpath(genpath('\\phhydra\data-new\phkinnerets\Lab\CODE\Hydra\'));
-codeDir='\\phhydra\data-new\phkinnerets\Lab\CODE\Hydra\OrientationAnalysis\';
+addpath(genpath('Z:\Analysis\users\Yonit\MatlabCodes\GroupCodes\\'));
+codeDir='Z:\Analysis\users\Yonit\MatlabCodes\GroupCodes\OrientationAnalysis\';
 
 warning('off', 'MATLAB:MKDIR:DirectoryExists');% this supresses warning of existing directory
 %% define mainDirList
 % mainDir = '\\phhydra\data-new\phhydra\Analysis\users\Yonit\Nematic Topological Defects\Movie Analysis\2018_10_22_pos11_test2';
- topMainDir='\\phhydra\data-new\phkinnerets\home\lab\CODE\Hydra\';
-; % main folder for movie analysis
+ topMainDir='Z:\Analysis\users\Yonit\Movie_Analysis\Labeled_cells\';
+ % main folder for movie analysis
 mainDirList= { ... % enter in the following line all the all the movie dirs to be analyzed
-'2019_02_18_pos3_EXAMPLE\', ...
+'2021_06_21_pos4\', ...
 
 };
 for i=1:length(mainDirList),mainDirList{i}=[topMainDir,mainDirList{i}];end
 
 toSave=1; % If zero, doesn't save images and doesn't overwrite existing images.
-numImages = 4; % can be 1,2 or 4
+numImages = 1; % can be 1,2 or 4
  
  
 %% intialize movie analysis to get movie info input
@@ -40,13 +40,14 @@ for i=1:length(mainDirList)
 end
  
 %% run manual analysis 
-% this will open the groundTruthLabeler after uploading the label
-% definitions from the mat file and the movie as an image sequence from
+% this will open the movieLabeler after uploading the movie as an image
+% sequence from the file. The label definitions need to be uploaded
+% manually from the code folder
 i=1; % place i to choose movie for manual analysis
 mainDir=[mainDirList{i},'\Orientation_Analysis'];
 dirQuiver = [mainDir,'\QuiverGTL']; % figures showing plots of quiver 
 cd(codeDir); cd('manualDefectAnalysis');
-groundTruthLabeler2('groundTruthLabelingSession_New.mat',dirQuiver); 
+videoLabeler(dirQuiver); 
 %IMPORTANT: IF YOU WANT TO SAVE THE LABELS, EXPORT LABELS INSIDE THE APP
 %UNDER THE NAME "ResultsGroundTruth.mat" AND SAVE IN THE MAIN ANALYSIS FOLDER.
 %The session should be saved with the relevant date in the main analysis

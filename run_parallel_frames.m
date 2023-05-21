@@ -3,8 +3,7 @@ function [] = run_parallel_frames(j)
 % Switch off warnings for existing directories
 warning('off', 'MATLAB:MKDIR:DirectoryExists');% this supresses warning of existing directory
 
-addpath(genpath('\\phhydra\data-new\phkinnerets\Lab\CODE\Hydra\'));
-addpath('\\phhydra\data-new\phhydra\Analysis\users\Yonit\MatlabCodes');
+addpath(genpath('\\phhydra\phhydraB\Analysis\users\Yonit\MatlabCodes\GroupCodes\'));
 
 currentFolder = pwd;
 %thesePars = load([currentFolder,'\ParallelParameters',num2str(j)]); 
