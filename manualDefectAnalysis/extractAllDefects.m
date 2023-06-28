@@ -12,7 +12,7 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
 %     end
     
     numDefects(k)=0; % initialize numdefects
-    fields = {'type','position','angle','ID','distance'}; c = cell(length(fields),1); c = cell2struct(c,fields); defect = c([]); defectList = c([]);  % initialize defectList and defect as empty structures
+    fields = {'type','position','angle','ID','distance','comment'}; c = cell(length(fields),1); c = cell2struct(c,fields); defect = c([]); defectList = c([]);  % initialize defectList and defect as empty structures
     
     ind = find(contains(gTruth.DataSource.Source,thisFileImNameBase));
     
@@ -26,6 +26,8 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;
                 defectList(numDefects(k)).ID=thisDefect.ID;
+                defectList(numDefects(k)).comment=thisDefect.comment;
+
                 
             end
         end
@@ -38,6 +40,8 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;
                 defectList(numDefects(k)).ID=thisDefect.ID;
+                defectList(numDefects(k)).comment=thisDefect.comment;
+
                 
             end
         end
@@ -50,7 +54,7 @@ function [] = extractAllDefects(k, dirLocalOP, thisFileImNameBase,gTruth,dirData
                 defectList(numDefects(k)).position= defPosition;
                 defectList(numDefects(k)).angle= defAngle;
                 defectList(numDefects(k)).ID=thisDefect.ID;
-                
+                defectList(numDefects(k)).comment=thisDefect.comment;
             end
         end
     end

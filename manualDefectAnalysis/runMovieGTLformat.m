@@ -41,6 +41,10 @@ analysisParameters = [gradientsigma,blocksigma,orientsmoothsigma,coherenceWinSiz
 %% run analysis on all frames and save
 % get images names
 cd(dirImages); fileNames=dir ('*.tif*');
+if isempty(fileNames)
+    fileNames=dir ('*.png*');
+end
+
 % if no frames variable is indicated run on the entire movie
 if ~exist('frames'),
     frames=[1:length(fileNames)];
@@ -49,7 +53,11 @@ end
 for k=frames
     k % show the frame being analyzed
     thisFile=fileNames(k).name;
-    endName=strfind(thisFile,'.tif'); thisFile=[thisFile(1:endName-1)];
+    endName=strfind(thisFile,'.tif'); 
+    if isempty(endName)
+        endName=strfind(thisFile,'.png'); 
+    end
+    thisFile=[thisFile(1:endName-1)];
     plotFrameGTL(thisFile, mainDir, analysisParameters, toSave,numImages); % this calculates the local order parameter and plots the quiver with the local order parameter and original image
 end
 %% save results for this movie
